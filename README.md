@@ -48,11 +48,11 @@ A custom attention mechanism that splits the attention heads into two groups: on
 A strong point of the paper is the number of experiments: the model is benchmarked across many datasets with varying numbers of channels and signal lengths, covering tasks from motor imagery to pathology detection. In my opinion, these are the most significant ones :
 
 <div align="center">
-<img src="figure/experiment-att.png" style="width: 70%;" />
+<img src="figure/experiment-att.png" style="width: 90%;" />
 </div>
 
 <div align="center">
-<img src="figure/archi-comparison-pretraining.png" style="width: 70%;" />
+<img src="figure/archi-comparison-pretraining.png" style="width: 90%;" />
 </div>
 
 ---
@@ -66,7 +66,7 @@ Different tasks operate at different timescales. Motor imagery unfolds over seve
 **Positional encoding design** The positional encoding is tied to a fixed grid of electrodes since the kernel size for the number of channels is kept constant across datasets, while some montage have up to 62 channels. This means the positional encoding, which encodes a fixed `(n_channels, n_patches)` grid, is never truly transferable across datasets with different topologies. The paper does show that the ACPE helps during pretraining (see figure below), which makes sense: it provides a useful inductive bias. But it does not constitute genuine cross-dataset spatial generalization.
 
 <div align="center">
-<img src="figure/experiment-pe.png" style="width: 70%;" />
+<img src="figure/experiment-pe.png" style="width: 90%;" />
 </div>
 
 So when fine-tuning on a new dataset with a different electrode setup, the model has to re-learn spatial relationships from scratch. The benefit of pretraining on this component is almost completely lost.
