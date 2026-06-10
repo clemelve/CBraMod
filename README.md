@@ -61,7 +61,10 @@ A strong point of the paper is the number of experiments: the model is benchmark
 
 ## Limitations
 
-**Signal lengths** Despite being presented as a generalizable foundation model, CBraMod handles dataset heterogeneity by fixing the input format: all signals are segmented into 1-second windows and resampled at 200Hz. Different tasks operate at different timescales. Motor imagery is usually shorter than an emotional response. Forcing everything into 1-second windows may simply cut the signal on a relevant brain dynamics. The perfect exemple is SEED-V that lasts 1 second but is sampled at 200Hz, so according to CBraMod is will result in one patch downsample at 200Hz, loose so many information.
+**Signal lengths** Despite being presented as a generalizable foundation model, CBraMod handles dataset heterogeneity by fixing the input format: all signals are segmented into 1-second windows and resampled at 200Hz. Different tasks operate at different timescales. Motor imagery and affective EEG responses exhibit different temporal dynamics. 
+
+A representative example is SEED-V, where each trial lasts only one second and is originally sampled at 1000 Hz.  While this standardization simplifies the design of a unified foundation model, it also raises concerns about the loss of task-specific temporal information. 
+
 
 **Positional encoding design** The positional encoding is tied to a fixed grid of electrodes since the kernel size for the number of channels is kept constant across datasets, while some montage have up to 62 channels. This means the positional encoding, which encodes a fixed `(n_channels, n_patches)` grid, is never truly transferable across datasets with different topologies. The paper does show that the ACPE helps during pretraining (see figure below), which makes sense: it provides a useful inductive bias. But it does not constitute genuine cross-dataset spatial generalization.
 
