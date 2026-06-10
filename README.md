@@ -90,7 +90,7 @@ A simple fix would be to adapt the stride to always produce a fixed target numbe
 
 **Flexible spatial encodings.** Using the 3D coordinates of electrode positions as input to a small MLP produces a spatial encoding that is dataset-agnostic by construction, the same encoding applies regardless of the number of channels or the headset used. This encoding would simply be added to a temporal position embedding, and the goal would be to learn a mapping from 3D coordinates to a representation that captures spatial relationships across the scalp. An implementation is available in **Notebook 2**.
 
-However, raw 3D coordinates carry no functional prior. For motor imagery for instance, C3 and C4 are functionally coupled despite being spatially symmetric, which geometry alone cannot capture. BrainJEPA addresses a similar issue in fMRI by learning a functional connectivity matrix that encodes inter-region relationships. A comparable approach for EEG could augment the geometric encoding with a learned or data-driven connectivity term, providing both anatomical and functional context to the spatial representation.
+However, raw 3D coordinates carry no functional prior. For motor imagery for instance, C3 and C4 are functionally coupled which geometry alone cannot capture. BrainJEPA addresses a similar issue in fMRI by learning a functional connectivity matrix that encodes inter-region relationships. A comparable approach for EEG could augment the geometric encoding with a learned or pre-computed connectivity term, providing both anatomical and functional context to the spatial representation.
 
 --
 
