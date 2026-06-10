@@ -61,7 +61,7 @@ A strong point of the paper is the number of experiments: the model is benchmark
 
 ## Limitations
 
-**Signal lengths** Despite being presented as a generalizable foundation model, CBraMod handles dataset heterogeneity by fixing the input format: all signals are segmented into 1-second windows and resampled at 200Hz. Different tasks operate at different timescales. Motor imagery and affective EEG responses exhibit different temporal dynamics. 
+**Signal lengths** Despite being presented as a generalizable foundation model, CBraMod handles dataset heterogeneity by fixing the input format: all signals are segmented into 1-second windows and resampled at 200Hz. Different tasks operate at different timescales. Motor imagery and emotion EEG responses exhibit different temporal dynamics. 
 
 A representative example is SEED-V, where each trial lasts only one second and is originally sampled at 1000 Hz.  While this standardization simplifies the design of a unified foundation model, it also raises concerns about the loss of task-specific temporal information. 
 
