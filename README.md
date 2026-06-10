@@ -74,7 +74,7 @@ A representative example is SEED-V, where each trial lasts only one second and i
 
 So when fine-tuning on a new dataset with a different electrode setup, the model has to re-learn spatial relationships from scratch. The benefit of pretraining on this component is almost completely lost.
 
-This is a problem for a foundation model. We demonstrate this in **Notebook 1**, where we fine-tune CBraMod on SHU-MI, a binary motor imagery task. SHU-MI uses 32 channels and only 4 temporal patches per trial, compared to 19 channels and 30 patches seen during pretraining. The model overfits quickly and reaches sub-optimal performance, not because the architecture is too large, but because the positional encoding provides almost no useful signal in this new configuration, forcing the model to learn the task with very little spatial context. We try to solve this task-agnostic fine-tuning in **Notebook 2**.
+This is a problem for a foundation model. We demonstrate this in **Notebook 1**, where we fine-tune CBraMod on SHU-MI, a binary motor imagery task. SHU-MI uses 32 channels and only 4 temporal patches per trial, compared to 19 channels and 30 patches seen during pretraining. The model overfits quickly and reaches sub-optimal performance, forcing the model to learn the task with very little spatial context never seen during pre-training. We try to solve this task-agnostic fine-tuning in **Notebook 2**.
 
 ---
 
