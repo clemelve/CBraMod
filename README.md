@@ -83,9 +83,13 @@ Second, the number of patches produced depends directly on the signal duration. 
 
 A simple fix would be to adapt the stride to always produce a fixed target number of patches regardless of signal duration, for instance always targeting 30 patches to match the pretraining configuration. 
 
+
+
 **Flexible positional encodings.** Using the 3D coordinates of electrode positions as input to a small MLP produces a spatial encoding that is dataset-agnostic by construction, the same encoding applies regardless of the number of channels or the headset used. This encoding would simply be added to a temporal position embedding, and the goal would be to learn a mapping from 3D coordinates to a representation that captures spatial relationships across the scalp. An implementation is available in **Notebook 2**.
 
 However, raw 3D coordinates carry no functional prior. For motor imagery for instance, C3 and C4 are functionally coupled despite being spatially symmetric, which geometry alone cannot capture. BrainJEPA addresses a similar issue in fMRI by learning a functional connectivity matrix that encodes inter-region relationships. A comparable approach for EEG could augment the geometric encoding with a learned or data-driven connectivity term, providing both anatomical and functional context to the spatial representation.
+
+
 
 **Pre-training objective.** While I think that the criss-cross attention module is a smart idea to incorporate spatial information in the attention mechanism, the current masked patch reconstruction task operates within each channel independently. The model learns to reconstruct a missing patch from its temporal context within the same channel, but never has to integrate information across channels to do so. This is a significant limitation: it means the pre-training task does not explicitly reward the model for learning cross-channel dependencies, which are arguably the most important ones for EEG understanding. BrainJEPA use of I-JEPA where context and target blocks are sampled randomly across the full spatio-temporal volume is a much more demanding and informative objective. I think that applying a similar multi-block, cross-channel prediction task to EEG pre-training could improve the quality of learned representations.
 
