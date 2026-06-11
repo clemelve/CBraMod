@@ -76,10 +76,6 @@ def amplitude_scaling(x, scale_range=(0.8, 1.2)):
     scale = torch.FloatTensor(x.shape[0], 1, 1, 1).uniform_(*scale_range)
     return x * scale.to(x.device)
 
-def time_shift(x, max_shift=20):
-    shift = np.random.randint(-max_shift, max_shift)
-    return torch.roll(x, shifts=shift, dims=-1)
-
 def gaussian_noise(x,  snr_db=20.0):
     signal_power = x.pow(2).mean()
     snr_linear   = 10 ** (snr_db / 10)
@@ -97,9 +93,6 @@ def augment_dataset(X, y, n_augments=3):
         
         if torch.rand(1) < 0.5:
             X_new = amplitude_scaling(X_new)
-        
-        if torch.rand(1) < 0.5:
-            X_new = time_shift(X_new, max_shift=20)
         
         X_aug.append(X_new)
         y_aug.append(y)
